@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'relative-urls-test';
+
+  public images = ['/images/blue.png', '/images/red.png'];
 }

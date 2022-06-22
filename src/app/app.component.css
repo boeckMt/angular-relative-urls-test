@@ -1,0 +1,38 @@
+/**
+*  All urls not starting with `/` get copied by the angular cli to the output folder
+*  https://github.com/angular/angular-cli/blob/14.0.x/packages/angular_devkit/build_angular/src/webpack/plugins/postcss-cli-resources.ts#L79
+*/
+.banner {
+  width: auto;
+  height: 435px;
+  /** does not work because path is not existing - worked in angular v9 */
+  /* background: url('images/large-image.png'); */
+
+  /** does work (even if the path doesn't exist) but not with build --base-href */
+  /** background: url('/images/large-image.png'); */
+
+  /** this works but is not recommended */
+  /* background: url('^images/large-image.png'); */
+
+
+  /**
+  * the image is copied to the output folder
+  * use --resources-output-path=images" to put it in a subdirectory
+  * but so the image is copied twice and must be filtered out of the assets input
+  * further the image is hashed this can be removed with --output-hashing=bundles [see --output-hashing](https://angular.io/cli/build)
+  */
+  /* background: url('../../git-lfs-images/large-image.png'); */
+
+
+  /** image is copied to dist/<app>/images through --resources-output-path=images so it must be filtered out of the assets input */
+  background: url('~git-lfs-images/large-image.png');
+
+
+  /**  ... more styles for the banner */
+}
+
+main {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
